@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Inter:Regular";
+  src: url("https://static.figma.com/font/Inter_1") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Inter:Medium";
+  src: url("https://static.figma.com/font/Inter_1") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Inter:Semi Bold";
+  src: url("https://static.figma.com/font/Inter_1") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Inter:Bold";
+  src: url("https://static.figma.com/font/Inter_1") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Noto Sans Math:Regular";
+  src: url("https://static.figma.com/font/NotoSansMath-Regular_1") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Noto Sans Symbols2:Regular";
+  src: url("https://static.figma.com/font/NotoSansSymbols2-Regular_5")
+    format("woff2");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Noto Sans Symbols:SemiBold";
+  src: url("https://static.figma.com/font/NotoSansSymbols-VF_2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Noto Sans:SemiBold";
+  src: url("https://static.figma.com/font/NotoSans-VF_3") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+}
+
+@theme {
+  --font-sans: "Inter:Regular", Inter, ui-sans-serif, system-ui, sans-serif;
+
+  --color-canvas: #f6f7f9;
+  --color-ink: #111827;
+  --color-muted: #5b6472;
+  --color-line: #e3e6eb;
+  --color-primary: #1e3a8a;
+  --color-primary-hover: #172f75;
+  --color-primary-soft: #e8eefb;
+
+  --color-success: #15803d;
+  --color-success-dark: #166534;
+  --color-success-soft: #dcfce7;
+  --color-warning: #c2410c;
+  --color-warning-dark: #c2410c;
+  --color-warning-soft: #ffedd5;
+  --color-danger: #b91c1c;
+  --color-danger-dark: #b91c1c;
+  --color-danger-soft: #fee2e2;
+  --color-mistral: #fa500f;
+  --color-mistral-soft: #fff1ea;
+
+  --shadow-card: 0 18px 55px -32px rgb(20 63 120 / 0.3);
+  --shadow-button: 0 10px 25px -12px rgb(20 63 120 / 0.65);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--color-canvas);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-medium {
+  font-family: "Inter:Medium", Inter, sans-serif;
+}
+
+.font-semibold {
+  font-family: "Inter:Semi Bold", Inter, sans-serif;
+}
+
+.font-bold,
+.font-extrabold {
+  font-family: "Inter:Bold", Inter, sans-serif;
+}
+
+button,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fill {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--score);
+  }
+}
+
+@utility animate-rise {
+  animation: rise 500ms ease-out both;
+}
+
+@utility animate-fill {
+  animation: fill 900ms 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  @page {
+    margin: 14mm;
+  }
+
+  body {
+    background: white;
+  }
+
+  .print-hidden {
+    display: none !important;
+  }
+
+  .note-page {
+    max-width: none;
+    padding: 0;
+  }
+
+  .note-card {
+    border: 0;
+    box-shadow: none;
+  }
+
+  .print-break-avoid,
+  .note-card section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
