@@ -1,0 +1,71 @@
+/* Variables du fichier Figma « prod-app » (collection Ouvert) */
+:root {
+  --background: #f6f0ee;
+  --card: #ffffff;
+  --border: #e3e6eb;
+  --foreground: #111827;
+  --muted-foreground: #5b6472;
+  --primary: #1e3a8a;
+  --primary-foreground: #ffffff;
+  --secondary: #e8eefb;
+  --ouvert: #15803d;
+  --ouvert-fond: #dcfce7;
+  --dispute: #c2410c;
+  --dispute-fond: #ffedd5;
+  --verrouille: #b91c1c;
+  --verrouille-fond: #fee2e2;
+  --mistral: #fa500f;
+  --mistral-fond: #fff1ea;
+  --nav: #1e3a8a;
+  --nav-foreground: #ffffff;
+  --sur-grad: #ffffff;
+  --degrade-nav-debut: #1a3380;
+  --degrade-nav-fin: #3667f0;
+  --degrade-fort-debut: #1c3785;
+  --degrade-fort-milieu: #2445a3;
+  --degrade-fort-fin: #3159c4;
+}
+
+.op-font {
+  font-family: Inter, "Inter:Regular", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Effet « Gloss bouton » */
+.op-btn-primary {
+  background: linear-gradient(to top, var(--primary) 0%, var(--primary) 55%, var(--degrade-nav-debut) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 1px 2px rgba(10, 20, 51, 0.16),
+    0 8px 18px -10px rgba(31, 59, 138, 0.35);
+}
+
+/* Effet « Barre » + dégradé navigation */
+.op-nav {
+  background: linear-gradient(to right, var(--degrade-nav-debut) 0%, var(--nav) 45%, var(--degrade-nav-fin) 100%);
+  box-shadow:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    0 6px 24px -10px rgba(10, 20, 51, 0.3);
+}
+
+/* Dégradé « Bloc fort » + effet « Relief bloc » */
+.op-bloc-fort {
+  background:
+    radial-gradient(ellipse 458px 162px at 41.7% 55.6%, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 55%),
+    linear-gradient(20.7deg, var(--degrade-fort-debut) 14.1%, var(--degrade-fort-milieu) 53.6%, var(--degrade-fort-fin) 85.9%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 18px 40px -24px rgba(20, 41, 110, 0.3);
+}
+
+/* Dégradé « Voile carte » */
+.op-voile-carte {
+  background: linear-gradient(to bottom, var(--secondary) 0%, var(--card) 45%);
+}
+
+@keyframes op-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+.op-pulse {
+  animation: op-pulse 1s ease-in-out infinite;
+}
