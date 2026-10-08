@@ -187,7 +187,7 @@ export default function Accueil(actions: AccueilActions) {
         </section>
 
         {/* Encart service — Veille+ */}
-        <section id="veille" className="op-bloc-fort flex flex-col items-stretch gap-8 rounded-[20px] p-8 md:flex-row md:items-center">
+        <section className="op-bloc-fort flex flex-col items-stretch gap-8 rounded-[20px] p-8 md:flex-row md:items-center">
           <div className="flex min-w-0 flex-1 flex-col items-start gap-3">
             <span className="rounded-full bg-[var(--secondary)] px-2.5 py-1 text-[11px] font-semibold leading-[1.3] tracking-[0.66px] text-[color:var(--primary)]">
               NOUVEAU SERVICE · VEILLE+
@@ -225,7 +225,7 @@ export default function Accueil(actions: AccueilActions) {
         </section>
 
         {/* Mes candidatures */}
-        <section id="applications" className="flex flex-col gap-3.5">
+        <section className="flex flex-col gap-3.5">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <h2 className="text-[22px] font-bold leading-[1.3]">Mes candidatures</h2>
             <div className="flex flex-wrap items-center gap-5">
