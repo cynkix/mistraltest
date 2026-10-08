@@ -426,7 +426,7 @@ export default function DecisionNote({
               </div>
               <p className="text-xs text-muted">
                 {counts.Go} go · {counts["Go sous conditions"]} sous conditions
-                · {pendingVotes} en attente
+                · {counts["No go"]} no go · {pendingVotes} en attente
               </p>
             </div>
 

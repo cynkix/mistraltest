@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { CheckCircle2 } from "lucide-react"
 import { analyze } from "./analyze"
 import AnalysisSteps from "./components/AnalysisSteps"
@@ -17,7 +17,8 @@ type Screen = ProductScreen | "analysis" | "verdict"
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>("dashboard")
-  const [route, setRoute] = useState(window.location.pathname)
+  const [route, setRoute] = useState(window.location.hash.slice(1))
+  const analysisRun = useRef(0)
   const [completedSteps, setCompletedSteps] = useState(0)
   const [toast, setToast] = useState<string | null>(null)
   const [noteStates, setNoteStates] = useState<Record<string, NoteState>>({
@@ -25,9 +26,9 @@ export default function App() {
   })
 
   useEffect(() => {
-    const updateRoute = () => setRoute(window.location.pathname)
-    window.addEventListener("popstate", updateRoute)
-    return () => window.removeEventListener("popstate", updateRoute)
+    const updateRoute = () => setRoute(window.location.hash.slice(1))
+    window.addEventListener("hashchange", updateRoute)
+    return () => window.removeEventListener("hashchange", updateRoute)
   }, [])
 
   useEffect(() => {
@@ -53,24 +54,28 @@ export default function App() {
   }
 
   const startAnalysis = async () => {
+    const run = ++analysisRun.current
     setCompletedSteps(0)
     setScreen("analysis")
     window.scrollTo({ top: 0 })
-    await analyze("BOAMP 26-118342", setCompletedSteps)
+    await analyze("BOAMP 26-118342", (step) => {
+      if (analysisRun.current === run) setCompletedSteps(step)
+    })
+    if (analysisRun.current !== run) return
     setScreen("verdict")
     window.scrollTo({ top: 0 })
   }
 
   const openDecisionNote = () => {
     const path = `/note/${decisionAvis.id}`
-    window.history.pushState({}, "", path)
+    window.location.hash = path
     setRoute(path)
     window.scrollTo({ top: 0 })
   }
 
   const returnToVerdict = () => {
-    window.history.pushState({}, "", "/")
-    setRoute("/")
+    window.history.pushState({}, "", window.location.pathname + window.location.search)
+    setRoute("")
     setScreen("verdict")
     window.scrollTo({ top: 0 })
   }
@@ -120,7 +125,10 @@ export default function App() {
         <main className="mx-auto min-h-screen max-w-[1196px] px-5 py-8 sm:px-8">
           <button
             type="button"
-            onClick={() => setScreen("dashboard")}
+            onClick={() => {
+              analysisRun.current += 1
+              setScreen("dashboard")
+            }}
             className="focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
           >
             <BrandLogo />
